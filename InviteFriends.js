@@ -29,7 +29,15 @@ export default class InviteFriends extends Component {
 
         }
     }
-   
+    componentDidMount() {
+        local.get("invitationCode").then(res => {
+            if (res) {
+                this.setState({ code: res })
+            }
+        }).catch(e => {
+        })
+        this.InviteFriendsApi()
+    }
     render() {
 
         return <LinearGradient style={styles.container} colors={['rgb(55,163,255)', 'rgb(82,112,253)']}>
@@ -178,6 +186,19 @@ export default class InviteFriends extends Component {
         </LinearGradient >
 
     }
+    gototalIncomeMaster(item) {
+        if (ClickUtil.noDoubleClick()) {
+            Actions.apprentice({ 'item': item })
+        }
+    }
+    gototalIncomeMasterZU(item) {
+        if (ClickUtil.noDoubleClick()) {
+            Actions.apprentice2({ 'item': item })
+        }
+    }
+    onBack() {
+        Actions.pop()
+    }
    
 }
 const styles = StyleSheet.create({
@@ -199,7 +220,21 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between'
     },
-  
+    styles_v2: {
+        marginTop: 42 * unitHeight,
+        width: 660 * unitWidth,
+        height: 660 * unitWidth,
+        marginLeft: 45 * unitWidth,
+        marginRight: 45 * unitWidth,
+        elevation: 6, 
+        shadowColor: "rgba(79, 118, 253, 0.53)",
+        shadowOffset: { width: 0, height: 0 }, 
+        shadowOpacity: 1,  
+        shadowRadius: 20 * unitWidth, 
+        borderRadius: 20 * unitWidth,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+    },
     styles_v3: {
         marginTop: 55 * unitWidth,
         flexDirection: 'row',
@@ -211,7 +246,6 @@ const styles = StyleSheet.create({
         marginTop: 21 * unitWidth,
         flexDirection: 'row',
     },
-   
    
     styles_v7: {
         marginLeft: 46 * unitWidth,
